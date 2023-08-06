@@ -3,14 +3,22 @@ import { DropdownProps, SelectionMode } from "@/components/dropdown/config"
 
 export default function Home() {
   const dropdownProps: DropdownProps = {
-    title: 'Demo',
+    title: 'Single Select',
     options: ['Op1', 'Op2'],
-    selectionMode: SelectionMode.MultiSelect
+    selectionMode: SelectionMode.SingleSelect,
+  }
+  
+  const multiSelectDropdownProps = {
+    ...dropdownProps,
+    title: 'Multi Select',
+    selectionMode: SelectionMode.MultiSelect,
+    defaultText: 'Make a selection'
   }
   
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-evenly p-24">
       <Dropdown {...dropdownProps} />
+      <Dropdown {...multiSelectDropdownProps} />
     </main>
   )
 }

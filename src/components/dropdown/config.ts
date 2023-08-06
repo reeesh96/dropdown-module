@@ -3,6 +3,7 @@ export interface DropdownProps {
     options: string[];
     selectionMode?: SelectionMode;
     required?: boolean;
+    defaultText?: string;
 }
 
 export enum SelectionMode {

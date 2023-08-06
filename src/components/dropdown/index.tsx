@@ -1,15 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import { DropdownProps } from "./config";
+import { DropdownProps, SelectionMode } from "./config";
 import './index.css'
+import { setToString } from "@/utils/setToString";
 
 export default function Dropdown(props: DropdownProps) {
-    const { title, options } = props
+    const { title, options, selectionMode, defaultText } = props
     const [ isCollapsed, setIsCollapsed ] = useState(true)
+    const [ selectedItems, _setSelectedItems ] = useState(new Set<string>())
+    const [ selectionResultString, setSelectionResultString ] = useState(defaultText ?? '')
 
     function handleItemClick(item: string) {
-        console.log(`You selected: ${item}`)
+        if (selectionMode === SelectionMode.SingleSelect) {
+            selectedItems.clear()
+            selectedItems.add(item)
+        } else if (selectionMode === SelectionMode.MultiSelect) {
+            if (selectedItems.has(item)) {
+                selectedItems.delete(item)
+            } else {
+                selectedItems.add(item)
+            }
+        }
+
+        setSelectionResultString(setToString(selectedItems, ', ') ?? defaultText ?? '')
     }
 
     return (
@@ -21,6 +35,7 @@ export default function Dropdown(props: DropdownProps) {
                     onClick={() => setIsCollapsed(!isCollapsed)}
                 >
                     <div className="w-full h-full">
+                        { selectionResultString }
                     </div>
                     <div className="px-[1rem]">
                         {isCollapsed ? 'V' : '^'}
