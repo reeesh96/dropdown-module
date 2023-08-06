@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { DropdownProps, SelectionMode } from "./config";
 import './index.css'
 import { setToString } from "@/utils/setToString";
+import { useClickAway } from "@/hooks/useClickAway";
 
 export default function Dropdown(props: DropdownProps) {
     const { title, options, selectionMode, defaultText, onSelectionChange, required } = props
     const [ isCollapsed, setIsCollapsed ] = useState(true)
     const [ selectedItems, _setSelectedItems ] = useState(new Set<string>())
     const [ selectionResultString, setSelectionResultString ] = useState(defaultText ?? '')
+    const menuRef = useRef(null);
+    useClickAway(menuRef, () => {
+        setIsCollapsed(true)
+    })
 
     function handleItemClick(item: string) {
         if (selectionMode === SelectionMode.SingleSelect) {
@@ -57,12 +62,13 @@ export default function Dropdown(props: DropdownProps) {
             <div className="relative w-full h-fit">
                 <div
                     className="dropdown-element"
-                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    onClick={() => setIsCollapsed(false)}
                 >
                     <div className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis">
                         { selectionResultString }
                     </div>
                     {
+                        // Use up arrow (&#9650) or down arrow (&#9660)
                         isCollapsed ? (
                             <p className="text-sm">&#9660;</p>
                         ) : (
@@ -70,7 +76,7 @@ export default function Dropdown(props: DropdownProps) {
                         )
                     }
                 </div>
-                <div hidden={isCollapsed} className="dropdown-menu-container">
+                <div ref={menuRef} hidden={isCollapsed} className="dropdown-menu-container">
                     <div className="flex flex-col items-start">
                         {
                             (selectionMode === SelectionMode.MultiSelect && options.length > 0) && (
