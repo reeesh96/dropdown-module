@@ -53,7 +53,8 @@ export default function Dropdown(props: DropdownProps) {
                                         key={`${option}_${index}`}
                                         onClick={() => handleItemClick(option)}
                                     >
-                                        {option}
+                                        {selectionMode === SelectionMode.MultiSelect && (<input type='checkbox'></input>)}
+                                        <div>{option}</div>
                                     </div>
                                 )
                             })
