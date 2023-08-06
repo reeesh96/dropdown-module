@@ -12,8 +12,9 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
 
-    @apply border-solid border-2 border-indigo-200
+    @apply border-solid border-2 border-indigo-200 px-[1rem] py-[0.5rem];
 }
 
 .dropdown-menu-container {
@@ -47,3 +48,9 @@
 .dropdown-menu-item_selected:hover {
     @apply bg-blue-300;
 }
+
+.caret {
+    translate: 0 25%;
+    border: .25em solid transparent;
+    border-top-color: #777;
+  }

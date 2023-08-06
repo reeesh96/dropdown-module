@@ -6,19 +6,21 @@ import { DropdownProps, SelectionMode } from "@/components/dropdown/config"
 export default function Home() {
   const dropdownProps: DropdownProps = {
     title: 'Single Select',
-    options: ['Op1', 'Op2'],
+    options: ['Tony Stark', 'Steve Rogers', 'Bruce Banner', 'Natasha Romanoff', 'Thor'],
     selectionMode: SelectionMode.SingleSelect,
     onSelectionChange(selectedItems) {
       console.log('Items Changed!')
       console.log(selectedItems)
     },
+    required: true
   }
   
   const multiSelectDropdownProps = {
     ...dropdownProps,
     title: 'Multi Select',
     selectionMode: SelectionMode.MultiSelect,
-    defaultText: 'Make a selection'
+    defaultText: 'Make a selection',
+    required: false
   }
   
   return (

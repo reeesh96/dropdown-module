@@ -6,7 +6,7 @@ import './index.css'
 import { setToString } from "@/utils/setToString";
 
 export default function Dropdown(props: DropdownProps) {
-    const { title, options, selectionMode, defaultText, onSelectionChange } = props
+    const { title, options, selectionMode, defaultText, onSelectionChange, required } = props
     const [ isCollapsed, setIsCollapsed ] = useState(true)
     const [ selectedItems, _setSelectedItems ] = useState(new Set<string>())
     const [ selectionResultString, setSelectionResultString ] = useState(defaultText ?? '')
@@ -48,18 +48,27 @@ export default function Dropdown(props: DropdownProps) {
 
     return (
         <div className="dropdown-container">
-            <p>{title}</p>
+            <div className="flex flex-row">
+                <p>{title}</p>
+                {required && (
+                    <p className="text-red-500">*</p>
+                )}
+            </div>
             <div className="relative w-full h-fit">
                 <div
                     className="dropdown-element"
                     onClick={() => setIsCollapsed(!isCollapsed)}
                 >
-                    <div className="w-full h-full">
+                    <div className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis">
                         { selectionResultString }
                     </div>
-                    <div className="px-[1rem]">
-                        {isCollapsed ? 'V' : '^'}
-                    </div>
+                    {
+                        isCollapsed ? (
+                            <p className="text-sm">&#9660;</p>
+                        ) : (
+                            <p className="text-sm">&#9650;</p>
+                        )
+                    }
                 </div>
                 <div hidden={isCollapsed} className="dropdown-menu-container">
                     <div className="flex flex-col items-start">
