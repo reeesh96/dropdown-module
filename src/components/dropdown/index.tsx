@@ -28,6 +28,24 @@ export default function Dropdown(props: DropdownProps) {
         setSelectionResultString(setToString(selectedItems, ', ') ?? defaultText ?? '')
     }
 
+    function handleSelectAllClick() {
+        if (allSelected()) {
+            selectedItems.clear()
+        } else {
+            selectedItems.clear()
+            for(const item of options) {
+                selectedItems.add(item)
+            }
+        }
+
+        onSelectionChange?.(Array.from(selectedItems))
+        setSelectionResultString(setToString(selectedItems, ', ') ?? defaultText ?? '')
+    }
+
+    function allSelected(): boolean {
+        return selectedItems.size === options.length
+    }
+
     return (
         <div className="dropdown-container">
             <p>{title}</p>
@@ -46,14 +64,28 @@ export default function Dropdown(props: DropdownProps) {
                 <div hidden={isCollapsed} className="dropdown-menu-container">
                     <div className="flex flex-col items-start">
                         {
+                            (selectionMode === SelectionMode.MultiSelect && options.length > 0) && (
+                                <div
+                                    className="dropdown-menu-item"
+                                    key={'select_all_option'}
+                                    onClick={() => handleSelectAllClick()}
+                                >
+                                    <input readOnly checked={allSelected()} type='checkbox'></input>
+                                    <div>{'Select All'}</div>
+                                </div>
+                            )
+                        }
+                        {
                             options.map((option, index) => {
                                 return (
                                     <div
-                                        className="dropdown-menu-item"
+                                        className={`dropdown-menu-item${selectedItems.has(option) ? '_selected' : ''}`}
                                         key={`${option}_${index}`}
                                         onClick={() => handleItemClick(option)}
                                     >
-                                        {selectionMode === SelectionMode.MultiSelect && (<input type='checkbox'></input>)}
+                                        {selectionMode === SelectionMode.MultiSelect && (
+                                            <input readOnly checked={selectedItems.has(option)} type='checkbox'></input>
+                                        )}
                                         <div>{option}</div>
                                     </div>
                                 )

@@ -28,8 +28,22 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+
+    @apply bg-white;
 }
 
 .dropdown-menu-item:hover {
-    @apply bg-slate-100
+    @apply bg-slate-100;
+}
+
+.dropdown-menu-item_selected {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    @apply bg-blue-200;
+}
+
+.dropdown-menu-item_selected:hover {
+    @apply bg-blue-300;
 }
