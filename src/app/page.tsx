@@ -1,3 +1,5 @@
+"use client"
+
 import Dropdown from "@/components/dropdown"
 import { DropdownProps, SelectionMode } from "@/components/dropdown/config"
 
@@ -6,6 +8,10 @@ export default function Home() {
     title: 'Single Select',
     options: ['Op1', 'Op2'],
     selectionMode: SelectionMode.SingleSelect,
+    onSelectionChange(selectedItems) {
+      console.log('Items Changed!')
+      console.log(selectedItems)
+    },
   }
   
   const multiSelectDropdownProps = {

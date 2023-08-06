@@ -6,7 +6,7 @@ import './index.css'
 import { setToString } from "@/utils/setToString";
 
 export default function Dropdown(props: DropdownProps) {
-    const { title, options, selectionMode, defaultText } = props
+    const { title, options, selectionMode, defaultText, onSelectionChange } = props
     const [ isCollapsed, setIsCollapsed ] = useState(true)
     const [ selectedItems, _setSelectedItems ] = useState(new Set<string>())
     const [ selectionResultString, setSelectionResultString ] = useState(defaultText ?? '')
@@ -22,6 +22,8 @@ export default function Dropdown(props: DropdownProps) {
                 selectedItems.add(item)
             }
         }
+
+        onSelectionChange?.(Array.from(selectedItems))
 
         setSelectionResultString(setToString(selectedItems, ', ') ?? defaultText ?? '')
     }
