@@ -12,7 +12,6 @@ export default function Home() {
       console.log('Items Changed!')
       console.log(selectedItems)
     },
-    required: true
   }
   
   const multiSelectDropdownProps = {
@@ -20,7 +19,7 @@ export default function Home() {
     title: 'Multi Select',
     selectionMode: SelectionMode.MultiSelect,
     defaultText: 'Make a selection',
-    required: false
+    required: true
   }
   
   return (

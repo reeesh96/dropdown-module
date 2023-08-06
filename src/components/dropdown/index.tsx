@@ -11,10 +11,19 @@ export default function Dropdown(props: DropdownProps) {
     const [ isCollapsed, setIsCollapsed ] = useState(true)
     const [ selectedItems, _setSelectedItems ] = useState(new Set<string>())
     const [ selectionResultString, setSelectionResultString ] = useState(defaultText ?? '')
-    const menuRef = useRef(null);
+    const [ isError, setIsError ] = useState(false)
+    
+    const menuRef = useRef(null)
     useClickAway(menuRef, () => {
         setIsCollapsed(true)
+        if (required) {
+            evaluateSelectedItems()
+        }
     })
+
+    function evaluateSelectedItems() {
+        setIsError(selectedItems.size === 0)
+    }
 
     function handleItemClick(item: string) {
         if (selectionMode === SelectionMode.SingleSelect) {
@@ -29,8 +38,8 @@ export default function Dropdown(props: DropdownProps) {
         }
 
         onSelectionChange?.(Array.from(selectedItems))
-
         setSelectionResultString(setToString(selectedItems, ', ') ?? defaultText ?? '')
+        evaluateSelectedItems()
     }
 
     function handleSelectAllClick() {
@@ -45,6 +54,7 @@ export default function Dropdown(props: DropdownProps) {
 
         onSelectionChange?.(Array.from(selectedItems))
         setSelectionResultString(setToString(selectedItems, ', ') ?? defaultText ?? '')
+        evaluateSelectedItems()
     }
 
     function allSelected(): boolean {
@@ -61,7 +71,7 @@ export default function Dropdown(props: DropdownProps) {
             </div>
             <div className="relative w-full h-fit">
                 <div
-                    className="dropdown-element"
+                    className={`dropdown-element ${isError ? 'border-red-500' : 'border-indigo-200'}`}
                     onClick={() => setIsCollapsed(false)}
                 >
                     <div className="w-full h-full overflow-hidden whitespace-nowrap text-ellipsis">
@@ -76,6 +86,11 @@ export default function Dropdown(props: DropdownProps) {
                         )
                     }
                 </div>
+                {
+                    isError && (
+                        <p className="text-sm text-red-500" >This is a required field! Please select a value.</p>
+                    )
+                }
                 <div ref={menuRef} hidden={isCollapsed} className="dropdown-menu-container">
                     <div className="flex flex-col items-start">
                         {
