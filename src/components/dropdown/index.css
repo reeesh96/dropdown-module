@@ -13,6 +13,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    border-radius: 5px;
 
     @apply border-solid border-2 px-[1rem] py-[0.5rem];
 }
@@ -23,14 +24,18 @@
     margin-top: 0.1rem;
     height: fit-content;
     width: 100%;
+    z-index: 10;
 }
 
 .dropdown-menu-item {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 0.5rem;
 
-    @apply bg-white;
+    @apply bg-white px-[1rem] py-[0.5rem];
 }
 
 .dropdown-menu-item:hover {
@@ -41,8 +46,11 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    gap: 0.5rem;
+    justify-content: start;
+    align-items: center;
 
-    @apply bg-blue-200;
+    @apply bg-blue-200 px-[1rem] py-[0.5rem];
 }
 
 .dropdown-menu-item_selected:hover {

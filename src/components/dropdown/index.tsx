@@ -116,7 +116,7 @@ export default function Dropdown(props: DropdownProps) {
                                         {selectionMode === SelectionMode.MultiSelect && (
                                             <input readOnly checked={selectedItems.has(option)} type='checkbox'></input>
                                         )}
-                                        <div>{option}</div>
+                                        <div className="overflow-hidden whitespace-nowrap text-ellipsis">{option}</div>
                                     </div>
                                 )
                             })
