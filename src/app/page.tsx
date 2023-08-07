@@ -9,8 +9,9 @@ export default function Home() {
   const [result1, setResult1] = useState('')
   const [result2, setResult2] = useState('')
 
+  // TO CUSTOMIZE FIRST DROPDOWN, EDIT HERE!
   const dropdownProps: DropdownProps = {
-    title: 'Single Select',
+    title: 'Select an Avenger',
     options: ['Tony Stark', 'Steve Rogers', 'Bruce Banner', 'Natasha Romanoff', 'Thor', 'Peter Parker', 'T\'Challa', 'Dr. Strange'],
     selectionMode: SelectionMode.SingleSelect,
     onSelectionChange(selectedItems: string[]) {
@@ -18,9 +19,10 @@ export default function Home() {
     },
   }
   
+  // TO CUSTOMIZE SECOND DROPDOWN, EDIT HERE!
   const multiSelectDropdownProps = {
     ...dropdownProps,
-    title: 'Multi Select',
+    title: 'Pick your Avengers',
     selectionMode: SelectionMode.MultiSelect,
     defaultText: 'Make a selection',
     required: true,
