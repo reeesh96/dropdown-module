@@ -3,15 +3,18 @@
 import { ApiTable } from "@/components/apiTable"
 import Dropdown from "@/components/dropdown"
 import { DropdownProps, SelectionMode } from "@/components/dropdown/config"
+import { useState } from "react"
 
 export default function Home() {
+  const [result1, setResult1] = useState('')
+  const [result2, setResult2] = useState('')
+
   const dropdownProps: DropdownProps = {
     title: 'Single Select',
     options: ['Tony Stark', 'Steve Rogers', 'Bruce Banner', 'Natasha Romanoff', 'Thor', 'Peter Parker', 'T\'Challa', 'Dr. Strange'],
     selectionMode: SelectionMode.SingleSelect,
-    onSelectionChange(selectedItems) {
-      console.log('Items Changed!')
-      console.log(selectedItems)
+    onSelectionChange(selectedItems: string[]) {
+      setResult1(selectedItems.join(','))
     },
   }
   
@@ -20,7 +23,10 @@ export default function Home() {
     title: 'Multi Select',
     selectionMode: SelectionMode.MultiSelect,
     defaultText: 'Make a selection',
-    required: true
+    required: true,
+    onSelectionChange(selectedItems: string[]) {
+      setResult2(selectedItems.join(','))
+    }
   }
   
   return (
@@ -28,10 +34,12 @@ export default function Home() {
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl">Single-Select Dropdown</h2>
         <Dropdown {...dropdownProps} />
+        <div>You Selected: { result1 }</div>
       </div>
       <div className="flex flex-col gap-4">
         <h2 className="text-3xl">Multi-Select Dropdown</h2>
         <Dropdown {...multiSelectDropdownProps} />
+        <div>You Selected: { result2 }</div>
       </div>
       <br></br>
       <div>
