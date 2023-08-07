@@ -20,4 +20,6 @@ To play with the properties of the module, you can open `/src/app/page.tsx`, and
 They are marked with the following comments:
 `TO CUSTOMIZE FIRST DROPDOWN, EDIT HERE!`
 and
-`TO CUSTOMIZE SECOND DROPDOWN, EDIT HERE!`
+`TO CUSTOMIZE SECOND DROPDOWN, EDIT HERE!`.
+
+You can reference the `API / Component Props` section on the main page about details on customization 
