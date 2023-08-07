@@ -1,12 +1,13 @@
 "use client"
 
+import { ApiTable } from "@/components/apiTable"
 import Dropdown from "@/components/dropdown"
 import { DropdownProps, SelectionMode } from "@/components/dropdown/config"
 
 export default function Home() {
   const dropdownProps: DropdownProps = {
     title: 'Single Select',
-    options: ['Tony Stark', 'Steve Rogers', 'Bruce Banner', 'Natasha Romanoff', 'Thor'],
+    options: ['Tony Stark', 'Steve Rogers', 'Bruce Banner', 'Natasha Romanoff', 'Thor', 'Peter Parker', 'T\'Challa', 'Dr. Strange'],
     selectionMode: SelectionMode.SingleSelect,
     onSelectionChange(selectedItems) {
       console.log('Items Changed!')
@@ -23,9 +24,20 @@ export default function Home() {
   }
   
   return (
-    <main className="flex min-h-screen flex-col items-center justify-evenly p-24">
-      <Dropdown {...dropdownProps} />
-      <Dropdown {...multiSelectDropdownProps} />
+    <main className="flex min-h-screen flex-col items-start gap-[4rem] p-24">
+      <div className="flex flex-col gap-4">
+        <h2 className="text-3xl">Single-Select Dropdown</h2>
+        <Dropdown {...dropdownProps} />
+      </div>
+      <div className="flex flex-col gap-4">
+        <h2 className="text-3xl">Multi-Select Dropdown</h2>
+        <Dropdown {...multiSelectDropdownProps} />
+      </div>
+      <br></br>
+      <div>
+        <h2 className="text-3xl">API / Component Props</h2>
+        <ApiTable />
+      </div>
     </main>
   )
 }

@@ -1,0 +1,21 @@
+#fields {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #fields td, #fields th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #fields tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #fields tr:hover {background-color: #ddd;}
+  
+  #fields th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: gray;
+    color: white;
+  }
